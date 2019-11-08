@@ -6,7 +6,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -59,7 +58,6 @@ public class TraditionalTests {
 		for (WebElement element: driver.findElements(By.xpath("//form/div[3]/div[2]/*"))) {
 			assertEquals(url+"#", element.getAttribute("href"));
 		}
-		
 		
 	}
 	
