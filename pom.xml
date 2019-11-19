@@ -27,13 +27,13 @@
 			<artifactId>eyes-selenium-java3</artifactId>
 			<version>3.158.4</version>
 		</dependency>
-		<!-- JUnit Assertions -->
+		<!-- TestNG Assertions -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.14.3</version>
+            <scope>test</scope>
+        </dependency>
 		<!-- Data driven test -->
 		<dependency>
 			<groupId>com.tngtech.java</groupId>

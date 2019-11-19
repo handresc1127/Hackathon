@@ -1,26 +1,23 @@
 package com.handresc1127.applitools.test1LoginPage;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class TraditionalTests {
 	
 	private WebDriver driver;
 
-	@Before
+	@BeforeMethod
 	public void beforeEach() {
 		// Use Chrome browser
 		ChromeOptions options = new ChromeOptions();
@@ -30,38 +27,42 @@ public class TraditionalTests {
 	
 	@Test
 	public void basicTest() {
-		String url= "https://demo.applitools.com/hackathon.html";
+		String url= "https://demo.applitools.com/hackathonV2.html";
 		driver.get(url);
+		SoftAssert sa = new SoftAssert();
 		
-		assertTrue(driver.findElement(By.className("auth-header")) instanceof WebElement);
-		assertThat(driver.findElement(By.className("auth-header")).getText(), containsString("Login Form"));
+		sa.assertTrue(driver.findElement(By.className("auth-header")) instanceof WebElement);
+		//sa.assertThat(driver.findElement(By.className("auth-header")).getText(), containsString("Login Form"));
 		
-		assertTrue(driver.findElement(By.id("username")) instanceof WebElement);
-		assertEquals("Enter your username",driver.findElement(By.id("username")).getAttribute("placeholder"));
-		assertTrue(driver.findElement(By.xpath("//*[@id='username']/../label")) instanceof WebElement);
-		assertEquals("Username",driver.findElement(By.xpath("//*[@id='username']/../label")).getText());
-		assertTrue(driver.findElement(By.xpath("//*[@id='username']/../*[contains(@class,'pre-icon')]")) instanceof WebElement);
-		assertThat(driver.findElement(By.xpath("//*[@id='username']/../*[contains(@class,'pre-icon')]")).getAttribute("class"), containsString("os-icon-user-male-circle"));
+		sa.assertTrue(driver.findElement(By.id("username")) instanceof WebElement);
+		sa.assertEquals("Enter your username",driver.findElement(By.id("username")).getAttribute("placeholder"));
+		sa.assertTrue(driver.findElement(By.xpath("//*[@id='username']/../label")) instanceof WebElement);
+		sa.assertEquals("Username",driver.findElement(By.xpath("//*[@id='username']/../label")).getText());
+		//sa.assertTrue(driver.findElement(By.xpath("//*[@id='username']/../*[contains(@class,'pre-icon')]")) instanceof WebElement);
+		//sa.assertThat(driver.findElement(By.xpath("//*[@id='username']/../*[contains(@class,'pre-icon')]")).getAttribute("class"), containsString("os-icon-user-male-circle"));
 		
-		assertTrue(driver.findElement(By.id("password")) instanceof WebElement);
-		assertEquals("Enter your password",driver.findElement(By.id("password")).getAttribute("placeholder"));
-		assertTrue(driver.findElement(By.xpath("//*[@id='password']/../label")) instanceof WebElement);
-		assertEquals("Password",driver.findElement(By.xpath("//*[@id='password']/../label")).getText());
-		assertTrue(driver.findElement(By.xpath("//*[@id='password']/../*[contains(@class,'pre-icon')]")) instanceof WebElement);
-		assertThat(driver.findElement(By.xpath("//*[@id='password']/../*[contains(@class,'pre-icon')]")).getAttribute("class"), containsString("os-icon-fingerprint"));
+		sa.assertTrue(driver.findElement(By.id("password")) instanceof WebElement);
+		sa.assertEquals("Enter your password",driver.findElement(By.id("password")).getAttribute("placeholder"));
+		sa.assertTrue(driver.findElement(By.xpath("//*[@id='password']/../label")) instanceof WebElement);
+		sa.assertEquals("Password",driver.findElement(By.xpath("//*[@id='password']/../label")).getText());
+		//sa.assertTrue(driver.findElement(By.xpath("//*[@id='password']/../*[contains(@class,'pre-icon')]")) instanceof WebElement);
+		//sa.assertThat(driver.findElement(By.xpath("//*[@id='password']/../*[contains(@class,'pre-icon')]")).getAttribute("class"), containsString("os-icon-fingerprint"));
 		
-		assertTrue(driver.findElement(By.id("log-in")) instanceof WebElement);
-		assertTrue(driver.findElement(By.id("alertEmpty")) instanceof WebElement);
-		assertTrue(driver.findElement(By.className("alert-primary")) instanceof WebElement);
-		assertTrue(driver.findElements(By.xpath("//form/div[3]/div[2]/*")) instanceof ArrayList);
-		assertEquals(3, driver.findElements(By.xpath("//form/div[3]/div[2]/*")).size());
+		sa.assertTrue(driver.findElement(By.id("log-in")) instanceof WebElement);
+		sa.assertTrue(driver.findElement(By.id("alertEmpty")) instanceof WebElement);
+		sa.assertTrue(driver.findElement(By.className("alert-primary")) instanceof WebElement);
+		sa.assertTrue(driver.findElements(By.xpath("//form/div[3]/div[2]/*")) instanceof ArrayList);
+		sa.assertEquals(3, driver.findElements(By.xpath("//form/div[3]/div[2]/*")).size());
 		for (WebElement element: driver.findElements(By.xpath("//form/div[3]/div[2]/*"))) {
-			assertEquals(url+"#", element.getAttribute("href"));
+			sa.assertEquals(url+"#", element.getAttribute("href"));
 		}
+		// the asserts used till now will not throw any exception if they fail. The @Test will not fail either.
+        // If you need the test method to fail at the end, showing all exceptions, you need to use assertAll()
+        sa.assertAll();
 		
 	}
 	
-	@After
+	@AfterClass
 	public void afterEach() {
 		// Close the browser.
 		driver.quit();
