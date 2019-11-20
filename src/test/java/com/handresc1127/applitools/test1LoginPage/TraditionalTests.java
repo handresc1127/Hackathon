@@ -86,7 +86,7 @@ public class TraditionalTests {
 	}
 	
     @Test(dataProvider="DataDrivenLogin")
-    public void paramTest(String strUser, String strPass, String strResponse) {
+    public void functionalLoginTest(String strUser, String strPass, String strResponse) {
 		driver.get(url);
 		SoftAssert sa = new SoftAssert();
         WebElement user, pass, login, alertPrimary;
