@@ -9,12 +9,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class TraditionalTests {
 	
 	private WebDriver driver;
+	String url= "https://demo.applitools.com/hackathonV2.html";
 
 	@BeforeTest
 	public void beforeEach() {
@@ -24,8 +26,7 @@ public class TraditionalTests {
 	}
 	
 	@Test
-	public void basicTest() {
-		String url= "https://demo.applitools.com/hackathon.html";
+	public void uiLoginTest() {
 		driver.get(url);
 		SoftAssert sa = new SoftAssert();
 		
@@ -74,6 +75,35 @@ public class TraditionalTests {
         sa.assertAll();
 		
 	}
+	
+	
+	@DataProvider(name = "DataDrivenLogin")
+	public Object[][] getDataFromDataprovider() {
+		return new Object[][] { 
+			{ "", "", "Both Username and Password must be present" }, 
+			{ "Us3rn4m3", "", "Password must be present" }, 
+			{ "", "Password", "Username must be present" } };
+	}
+	
+    @Test(dataProvider="DataDrivenLogin")
+    public void paramTest(String strUser, String strPass, String strResponse) {
+		driver.get(url);
+		SoftAssert sa = new SoftAssert();
+        WebElement user, pass, login, alertPrimary;
+		
+		try {user=driver.findElement(By.id("username"));}catch(Exception e){user=null;}
+		try {pass=driver.findElement(By.id("password"));}catch(Exception e){pass=null;}
+		try {login=driver.findElement(By.id("log-in"));}catch(Exception e){login=null;}
+		try {alertPrimary= driver.findElement(By.className("alert-primary"));}catch(Exception e){alertPrimary=null;}
+		
+		user.sendKeys(strUser);
+		pass.sendKeys(strPass);
+		login.click();
+		sa.assertEquals(alertPrimary.getText(), strResponse);
+		sa.assertEquals(alertPrimary.getAttribute("class"), "alert alert-warning");
+		sa.assertEquals(alertPrimary.getAttribute("style"), "display: block;");
+		sa.assertAll();
+    }
 	
 	@AfterClass
 	public void afterEach() {
