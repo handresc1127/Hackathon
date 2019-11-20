@@ -1,6 +1,8 @@
 package com.handresc1127.applitools.test1LoginPage;
 
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.ArrayList;
 
 import org.openqa.selenium.By;
@@ -27,7 +29,7 @@ public class TraditionalTests {
 	
 	@Test
 	public void basicTest() {
-		String url= "https://demo.applitools.com/hackathonV2.html";
+		String url= "https://demo.applitools.com/hackathon.html";
 		driver.get(url);
 		SoftAssert sa = new SoftAssert();
 		
@@ -35,16 +37,16 @@ public class TraditionalTests {
 		//sa.assertThat(driver.findElement(By.className("auth-header")).getText(), containsString("Login Form"));
 		
 		sa.assertTrue(driver.findElement(By.id("username")) instanceof WebElement);
-		sa.assertEquals("Enter your username",driver.findElement(By.id("username")).getAttribute("placeholder"));
+		sa.assertEquals(driver.findElement(By.id("username")).getAttribute("placeholder"),"Enter your username");
 		sa.assertTrue(driver.findElement(By.xpath("//*[@id='username']/../label")) instanceof WebElement);
-		sa.assertEquals("Username",driver.findElement(By.xpath("//*[@id='username']/../label")).getText());
+		sa.assertEquals(driver.findElement(By.xpath("//*[@id='username']/../label")).getText(),"Username");
 		//sa.assertTrue(driver.findElement(By.xpath("//*[@id='username']/../*[contains(@class,'pre-icon')]")) instanceof WebElement);
 		//sa.assertThat(driver.findElement(By.xpath("//*[@id='username']/../*[contains(@class,'pre-icon')]")).getAttribute("class"), containsString("os-icon-user-male-circle"));
 		
 		sa.assertTrue(driver.findElement(By.id("password")) instanceof WebElement);
-		sa.assertEquals("Enter your password",driver.findElement(By.id("password")).getAttribute("placeholder"));
+		sa.assertEquals(driver.findElement(By.id("password")).getAttribute("placeholder"),"Enter your password");
 		sa.assertTrue(driver.findElement(By.xpath("//*[@id='password']/../label")) instanceof WebElement);
-		sa.assertEquals("Password",driver.findElement(By.xpath("//*[@id='password']/../label")).getText());
+		sa.assertEquals(driver.findElement(By.xpath("//*[@id='password']/../label")).getText(),"Password");
 		//sa.assertTrue(driver.findElement(By.xpath("//*[@id='password']/../*[contains(@class,'pre-icon')]")) instanceof WebElement);
 		//sa.assertThat(driver.findElement(By.xpath("//*[@id='password']/../*[contains(@class,'pre-icon')]")).getAttribute("class"), containsString("os-icon-fingerprint"));
 		
@@ -52,9 +54,9 @@ public class TraditionalTests {
 		sa.assertTrue(driver.findElement(By.id("alertEmpty")) instanceof WebElement);
 		sa.assertTrue(driver.findElement(By.className("alert-primary")) instanceof WebElement);
 		sa.assertTrue(driver.findElements(By.xpath("//form/div[3]/div[2]/*")) instanceof ArrayList);
-		sa.assertEquals(3, driver.findElements(By.xpath("//form/div[3]/div[2]/*")).size());
+		sa.assertEquals(driver.findElements(By.xpath("//form/div[3]/div[2]/*")).size(),3);
 		for (WebElement element: driver.findElements(By.xpath("//form/div[3]/div[2]/*"))) {
-			sa.assertEquals(url+"#", element.getAttribute("href"));
+			sa.assertEquals(element.getAttribute("href"), url+"#");
 		}
 		// the asserts used till now will not throw any exception if they fail. The @Test will not fail either.
         // If you need the test method to fail at the end, showing all exceptions, you need to use assertAll()
