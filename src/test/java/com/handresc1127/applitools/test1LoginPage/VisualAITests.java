@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,16 +17,17 @@ import com.applitools.eyes.EyesRunner;
 import com.applitools.eyes.selenium.ClassicRunner;
 import com.applitools.eyes.selenium.Eyes;
 import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
 
-@RunWith(JUnit4.class)
+@RunWith(DataProviderRunner.class)
 public class VisualAITests {
 
 	private EyesRunner runner;
 	private Eyes eyes;
 	private static BatchInfo batch;
 	private WebDriver driver;
-	String url= "https://demo.applitools.com/hackathon.html";
+	String url= "https://demo.applitools.com/hackathonV2.html";
 
 	@BeforeClass
 	public static void setBatch() {
@@ -60,9 +60,8 @@ public class VisualAITests {
 		eyes.closeAsync();
 	}
 	
-	
 	@DataProvider
-	public Object[][] dataProvider() {
+	public static Object[][] dataProvider() {
 		return new Object[][] { 
 			{ "", "", "Both Username and Password must be present" }, 
 			{ "Us3rn4m3", "", "Password must be present" }, 
@@ -83,6 +82,9 @@ public class VisualAITests {
 		eyes.closeAsync();
     }
 
+	
+	
+	
 	@After
 	public void afterEach() {
 		driver.quit();
