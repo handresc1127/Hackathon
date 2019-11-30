@@ -23,7 +23,7 @@ public class VisualAITests {
 	private Eyes eyes;
 	private static BatchInfo batch;
 	private WebDriver driver;
-	String url= "https://demo.applitools.com/hackathon.html";
+	String url= "https://demo.applitools.com/hackathonV2.html";
 
 	@BeforeClass
 	public static void setBatch() {

@@ -19,7 +19,7 @@ import org.testng.asserts.SoftAssert;
 public class TraditionalTests {
 	
 	private WebDriver driver;
-	String url= "https://demo.applitools.com/hackathon.html";
+	String url= "https://demo.applitools.com/hackathonV2.html";
 
 	@BeforeTest
 	public void beforeEach() {
