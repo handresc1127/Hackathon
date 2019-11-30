@@ -49,7 +49,7 @@ public class VisualAITests {
 
 	}
 
-	@Test(priority = 1, testName = "Login Page UI Elements Test")
+	@Test
 	public void uiLoginTest() {
 		eyes.open(driver, "1. Login Page UI Elements Test", "uiLoginTest");
 		driver.get(url);
@@ -66,7 +66,7 @@ public class VisualAITests {
 			{"Us3rn4m3","Password", "Username and Password present"}};
 	}
 	
-	@Test(priority = 2, testName = "Data-Driven Test", dataProvider="DataDrivenLogin")
+	@Test(dataProvider="DataDrivenLogin")
     public void dataDrivenTest(String strUser, String strPass, String testName) {
     	eyes.open(driver, "2. Data Driven Test", testName);
     	driver.get(url);
@@ -79,7 +79,7 @@ public class VisualAITests {
 		eyes.closeAsync();
     }
 	
-	@Test(priority = 3, testName = "Table Sort Test")
+	@Test
 	public void shortTableTest() {
 		eyes.open(driver, "3. Table Sort Test", "shortTableTest");
 		driver.get(url);
@@ -93,7 +93,7 @@ public class VisualAITests {
 		eyes.closeAsync();
 	}
 	
-	@Test(priority = 4, testName = "Canvas Chart Test")
+	@Test
 	public void canvasChartTest() {
 		eyes.open(driver, "4. Canvas Chart Test", "canvasChartTest");
 		driver.get(url);
@@ -109,7 +109,7 @@ public class VisualAITests {
 		eyes.closeAsync();
 	}
 	
-	@Test(priority = 5, testName = "Dynamic Content Test")
+	@Test
 	public void dynamicContentTest() {
 		eyes.open(driver, "5. Dynamic Content Test", "dynamicContentTest");
 		driver.get(url+"?showAd=true");

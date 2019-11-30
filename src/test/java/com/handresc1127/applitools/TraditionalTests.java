@@ -19,7 +19,7 @@ import org.testng.asserts.SoftAssert;
 public class TraditionalTests {
 	
 	private WebDriver driver;
-	String url= "https://demo.applitools.com/hackathonV2.html";
+	String url= "https://demo.applitools.com/hackathon.html";
 
 	@BeforeTest
 	public void beforeEach() {
@@ -28,7 +28,7 @@ public class TraditionalTests {
 		driver = new ChromeDriver(options);
 	}
 	
-	@Test(priority = 1, testName = "Login Page UI Elements Test")
+	@Test
 	public void uiLoginTest() {
 		driver.get(url);
 		SoftAssert sa = new SoftAssert();
@@ -89,7 +89,7 @@ public class TraditionalTests {
 			{"Us3rn4m3","Password", "Username and Password present"}};
 	}
 	
-    @Test(priority = 2, testName = "Data-Driven Test", dataProvider="DataDrivenLogin")
+    @Test(dataProvider="DataDrivenLogin")
     public void dataDrivenTest(String strUser, String strPass, String strResponse) {
 		driver.get(url);
 		SoftAssert sa = new SoftAssert();
@@ -113,7 +113,7 @@ public class TraditionalTests {
 		sa.assertAll();
     }
     
-    @Test(priority = 3, testName = "Table Sort Test")
+    @Test
     public void shortTableTest() {
 		driver.get(url);
 		SoftAssert sa = new SoftAssert();
@@ -193,7 +193,7 @@ public class TraditionalTests {
 		return table;
 	}
 	
-	@Test(priority = 4, testName = "Canvas Chart Test")
+	@Test
 	public void canvasChartTest() {
 		driver.get(url);
 		SoftAssert sa = new SoftAssert();
@@ -228,7 +228,7 @@ public class TraditionalTests {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 5, testName = "Dynamic Content Test")
+	@Test
 	public void dynamicContentTest() {
 		driver.get(url+"?showAd=true");
 		SoftAssert sa = new SoftAssert();
