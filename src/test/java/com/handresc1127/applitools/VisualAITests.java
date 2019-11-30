@@ -1,4 +1,4 @@
-package com.handresc1127.applitools.test1LoginPage;
+package com.handresc1127.applitools;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;

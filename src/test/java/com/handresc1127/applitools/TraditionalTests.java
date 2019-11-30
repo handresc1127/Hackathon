@@ -1,4 +1,4 @@
-package com.handresc1127.applitools.test1LoginPage;
+package com.handresc1127.applitools;
 
 import static org.junit.Assert.assertTrue;
 
