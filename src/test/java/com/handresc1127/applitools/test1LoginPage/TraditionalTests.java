@@ -197,7 +197,7 @@ public class TraditionalTests {
 	public void canvasChartTest() {
 		driver.get(url);
 		SoftAssert sa = new SoftAssert();
-        WebElement user, pass, login, showExpensesChart;
+        WebElement user, pass, login, showExpensesChart, canvas, addDataset;
 		
 		try {user=driver.findElement(By.id("username"));}catch(Exception e){user=null;}
 		try {pass=driver.findElement(By.id("password"));}catch(Exception e){pass=null;}
@@ -209,8 +209,50 @@ public class TraditionalTests {
 		try {showExpensesChart=driver.findElement(By.id("showExpensesChart"));}catch(Exception e){showExpensesChart=null;}
 		showExpensesChart.click();
 		
+		try {canvas=driver.findElement(By.id("canvas"));}catch(Exception e){canvas=null;}
+		sa.assertEquals(canvas.isDisplayed(), true);
+		//********************* Note *********************
+		//* It isn't possible to test the canvas content *
+		//************************************************
+		
+		try {addDataset=driver.findElement(By.id("addDataset"));}catch(Exception e){addDataset=null;}
+		addDataset.click();
+		
+		try {canvas=driver.findElement(By.id("canvas"));}catch(Exception e){canvas=null;}
+		sa.assertEquals(canvas.isDisplayed(), true);
+		//********************* Note *********************
+		//* It isn't possible to test the canvas content *
+		//************************************************
+		
 		
 		sa.assertAll();
+	}
+	
+	@Test(priority = 5, testName = "Dynamic Content Test")
+	public void dynamicContentTest() {
+		driver.get(url+"?showAd=true");
+		SoftAssert sa = new SoftAssert();
+        WebElement user, pass, login, flashSale1, flashSale2;
+        String image1,image2;
+		
+		try {user=driver.findElement(By.id("username"));}catch(Exception e){user=null;}
+		try {pass=driver.findElement(By.id("password"));}catch(Exception e){pass=null;}
+		try {login=driver.findElement(By.id("log-in"));}catch(Exception e){login=null;}
+		user.sendKeys("Us3rn4m3");
+		pass.sendKeys("Password");
+		login.click();
+		
+		try {flashSale1=driver.findElement(By.id("flashSale"));}catch(Exception e){flashSale1=null;}
+		sa.assertEquals(flashSale1.isDisplayed(), true);
+		try {flashSale2=driver.findElement(By.id("flashSale2"));}catch(Exception e){flashSale2=null;}
+		sa.assertEquals(flashSale2.isDisplayed(), true);
+		try {image1=driver.findElement(By.xpath("//*[@id='flashSale']//img")).getAttribute("src");}catch(Exception e){image1=null;}
+		sa.assertEquals(image1, "https://demo.applitools.com/img/flashSale.gif");
+		try {image2=driver.findElement(By.xpath("//*[@id='flashSale2']//img")).getAttribute("src");}catch(Exception e){image2=null;}
+		sa.assertEquals(image2, "https://demo.applitools.com/img/flashSale2.gif");
+		
+		sa.assertAll();
+		
 	}
 	
 	@AfterClass

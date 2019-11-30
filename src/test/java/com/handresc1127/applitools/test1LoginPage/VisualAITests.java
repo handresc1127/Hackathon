@@ -103,11 +103,23 @@ public class VisualAITests {
 		driver.findElement(By.id("showExpensesChart")).click();
 		eyes.checkWindow("Canvas Chart");
 		
+		driver.findElement(By.id("addDataset")).click();
+		eyes.checkWindow("Canvas Chart add data set");
+		
+		eyes.closeAsync();
+	}
+	
+	@Test(priority = 5, testName = "Dynamic Content Test")
+	public void dynamicContentTest() {
+		eyes.open(driver, "5. Dynamic Content Test", "dynamicContentTest");
+		driver.get(url+"?showAd=true");
+		driver.findElement(By.id("username")).sendKeys("Us3rn4m3");
+    	driver.findElement(By.id("password")).sendKeys("Password");
+		driver.findElement(By.id("log-in")).click();
+		eyes.checkWindow("Dynamic Content");
 		eyes.closeAsync();
 	}
 
-	
-	
 	
 	@AfterMethod
 	public void afterEach() {
